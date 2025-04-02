@@ -5,6 +5,7 @@ from ta.momentum import RSIIndicator, StochasticOscillator, ROCIndicator
 from ta.volatility import BollingerBands, AverageTrueRange
 from ta.volume import OnBalanceVolumeIndicator, VolumeWeightedAveragePrice
 from ta.utils import dropna
+import numpy as np
 
 #load data
 df = pd.read_csv('./stock_market_data/nyse/csv/AAC.csv', sep=',')
@@ -61,8 +62,11 @@ df["Clopen"] = df["Close"]/df["Open"]
 # High/Low
 df["HighLow"] = df["High"]/df["Low"]
 
-
-
+# Log Change
+df["log_price"] = np.log(df["Close"])
+df["Log5"] = df["log_price"] - df["log_price"].shift(5)
+df["Log15"] = df["log_price"] - df["log_price"].shift(15)
+df["Log30"] = df["log_price"] - df["log_price"].shift(30)
 
 print(df.head())
 df.to_csv("test_AAC.csv", index=False)
