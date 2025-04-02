@@ -53,7 +53,15 @@ roc = ROCIndicator(close=df["Close"], window=10).roc()
 df["roc_10"] = roc
 
 # Increase
-df["Increase"] = (df["Close"].shift(1) < df["Close"]).astype(int)
+df["Target"] = (df["Close"].shift(-1) > df["Close"]).astype(int)
+
+# Clopen
+df["Clopen"] = df["Close"]/df["Open"]
+
+# High/Low
+df["HighLow"] = df["High"]/df["Low"]
+
+
 
 
 print(df.head())
