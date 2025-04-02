@@ -16,13 +16,10 @@ companies = company_df["Symbol"]
 #print(companies)
 companies = companies.tolist
 #print(companies)
-count = 0
-print("pre-split")
-company_split = {company: df[df["Symbol"] == company] for company in df["Symbol"].unique()}
 
+company_split = {company: df[df["Symbol"] == company] for company in df["Symbol"].unique()}
 for group, sub_df in company_split.items():
-    #print(count)
-    count += 1
+    
     print(f"Group {group}:\n{sub_df}\n")
 
     # Exponential Moving Averages
@@ -82,5 +79,5 @@ for group, sub_df in company_split.items():
     sub_df["Log15"] = sub_df["log_price"] - sub_df["log_price"].shift(15)
     sub_df["Log30"] = sub_df["log_price"] - sub_df["log_price"].shift(30)
 
-    #print(sub_df.head(), group)
-    sub_df.to_csv("clean_data/{}.csv".format(group), index=False)
+    print(sub_df.head(), group)
+    sub_df.to_csv("{}.csv".format(group), index=False)
