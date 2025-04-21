@@ -78,6 +78,9 @@ for group, sub_df in company_split.items():
     sub_df["Log5"] = sub_df["log_price"] - sub_df["log_price"].shift(5)
     sub_df["Log15"] = sub_df["log_price"] - sub_df["log_price"].shift(15)
     sub_df["Log30"] = sub_df["log_price"] - sub_df["log_price"].shift(30)
+    
+    # percent change
+    sub_df['Pct_Change'] = (sub_df['Close'].shift(-1) - sub_df['Close']) / sub_df['Close']
 
     print(sub_df.head(), group)
     sub_df.to_csv("{}.csv".format(group), index=False)
