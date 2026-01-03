@@ -95,36 +95,24 @@ CX4240_Weather_and_Stocks/
 
 ## 📈 Key Results
 
-### Model Performance Improvements
+### Classification Accuracy
 
-```
-Adding Weather Features:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Base Model (Stock Only)
-  ├─ Accuracy:  61.23%
-  ├─ ROC-AUC:   0.6630
-  └─ F1 Score:  0.6776
+| Model | Accuracy | ROC-AUC | F1 Score | Improvement |
+|-------|----------|---------|----------|-------------|
+| Base (Stock Only) | 61.23% | 0.6630 | 0.6776 | - |
+| Combined (Stock + Weather) | 70.76% | 0.7790 | 0.7383 | +9.53% |
 
-Combined Model (Stock + Weather)
-  ├─ Accuracy:  70.76%  (+9.53%)  ⬆️
-  ├─ ROC-AUC:   0.7790  (+0.116)  ⬆️
-  └─ F1 Score:  0.7383  (+0.061)  ⬆️
-```
+### Cross-Validation Results (TimeSeriesSplit, 3 folds)
 
-### Cross-Validation Results
+- **Average Accuracy:** 58.92% (base: 51.79%) → **+7.13% improvement**
+- **Average ROC-AUC:** 0.6342 (base: 0.5188) → **+22.25% relative improvement**
+- **Consistent across all 3 folds**, demonstrating robust generalization
 
-| Metric | Base | Combined | Improvement |
-|--------|------|----------|-------------|
-| Accuracy | 51.79% | 58.92% | **+7.13%** |
-| Precision | 52.46% | 57.58% | +5.12% |
-| F1 Score | 62.81% | 66.81% | +4.00% |
-| ROC-AUC | 0.5188 | 0.6342 | **+22.25%** |
+### Seasonal Impact
 
-### Seasonal Impact Analysis
-
-**Weather Prediction Improvement by Season:**
-- **Summer:** +7.85% accuracy (strongest effect)
-- **Spring:** +7.22% accuracy
+Weather features provide the strongest prediction improvement during:
+- **Summer:** +7.85% accuracy
+- **Spring:** +7.22% accuracy  
 - **Fall:** +6.79% accuracy
 - **Winter:** +6.61% accuracy
 
@@ -166,12 +154,18 @@ Stocks Analyzed:   172 S&P 500 tickers
 ```
 
 ### Trading Performance
-Multiple strategies were implemented and backtested with realistic transaction costs (0.1%) 
-and slippage (0.1%). Results varied significantly by ticker and time period. See 
-`weather-stock-analysis.ipynb` for detailed per-stock performance breakdowns.
+Trading strategies based on model predictions were explored using realistic 
+transaction costs (0.1%) and slippage (0.1%). While the classification accuracy 
+improvements are statistically significant, translating these into profitable 
+trading strategies requires additional work including:
 
-Key Finding: Weather-sensitive strategy showed improved Sharpe ratios compared to baseline, 
-though absolute returns varied based on market conditions.
+- Proper position sizing and risk management
+- Multi-horizon prediction (1-day, 5-day, 20-day)
+- Portfolio-level optimization rather than single-stock strategies
+- Out-of-sample validation on 2025 data
+
+The current backtesting framework is available in the notebooks but should be 
+considered exploratory rather than production-ready.
 
 ---
 
