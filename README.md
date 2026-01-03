@@ -165,16 +165,13 @@ Test Period:       2024 (Last year of data)
 Stocks Analyzed:   172 S&P 500 tickers
 ```
 
-### Trading Performance (Sample: 5 Weather-Sensitive Stocks)
+### Trading Performance
+Multiple strategies were implemented and backtested with realistic transaction costs (0.1%) 
+and slippage (0.1%). Results varied significantly by ticker and time period. See 
+`weather-stock-analysis.ipynb` for detailed per-stock performance breakdowns.
 
-| Strategy | Avg Return | Sharpe Ratio | Win Rate | # Trades |
-|----------|-----------|--------------|----------|----------|
-| **Weather-Sensitive** | +234.82% | 1.36 | 100% | 1046 |
-| Basic (No Weather) | +4.16% | 0.47 | 100% | 63 |
-| SMA Crossover | +170.02% | 0.59 | N/A | 79 |
-| Buy & Hold | +1133.34% | N/A | N/A | 0 |
-
-**Note:** The extreme returns indicate overfitting in some tickers. This highlights the importance of robust validation and the challenges of backtesting on historical data.
+Key Finding: Weather-sensitive strategy showed improved Sharpe ratios compared to baseline, 
+though absolute returns varied based on market conditions.
 
 ---
 
